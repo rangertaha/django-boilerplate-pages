@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url
-from .views import MenuView
-
+from django.views.generic import TemplateView
 
 urlpatterns = [
-    url(r'^$', MenuView.as_view()),
+    url(r'^$', TemplateView.as_view(template_name="pages/index.html")),
 ]
