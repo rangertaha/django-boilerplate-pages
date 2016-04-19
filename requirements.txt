@@ -1,0 +1,12 @@
+Django>=1.9.4
+Pillow>=2.0.0
+coverage==3.5
+html5lib>=0.90
+httplib2==0.7.6
+nose==1.0.0
+pyPdf2==1.19
+reportlab==2.5
+xhtml2pdf==0.0.6
+django-markdown-deux==1.0.5
+django-admin-tools==0.7.2
+django-suit==0.2.18
