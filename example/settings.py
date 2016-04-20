@@ -2,7 +2,6 @@
 # Django settings for example project.
 import os
 import sys
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -88,14 +87,7 @@ STATICFILES_FINDERS = (
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'i=fs4hc7ffx1o&l2t8p8i^6j%c)^(@37yczai&5c5yt^igf92+'
-'''
-# Pre Django 1.8
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
 
-'''
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -128,11 +120,7 @@ ROOT_URLCONF = 'urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'wsgi.application'
-'''
-TEMPLATE_DIRS = (
-    os.path.join(PROJ_ROOT, 'templates'),
-)
-'''
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -143,7 +131,6 @@ INSTALLED_APPS = (
 
     'mptt',
     'pages',
-    'markdown_deux',
 
     'simpleapp',
 )

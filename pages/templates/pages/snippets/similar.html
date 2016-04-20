@@ -1,0 +1,25 @@
+{% if tool.similar.all %}
+<h3>Similar</h3>
+{% for rel in tool.similar.all %}
+<div class="media">
+    {% if rel.icon %}
+    <a class="pull-left" href="">
+        <img class="media-object" data-src="" alt="74x74" style="width: 74px; height: 74px;" src="{{ rel.icon|default:'http://placehold.it/74x74' }}">
+    </a>
+    {% else %}
+    <span class="pull-left glyphicon glyphicon-cog" style="font-size: 20px; line-height: 1.33; border-radius: 6px;"></span>
+    {% endif %}
+    <div class="media-body">
+        <h5 class="media-heading" style="margin-top:7px;margin-bottom:0px; "><a href="{% url 'view' rel.slug %}">{{ rel.title|title|safe }}</a></h5>
+        {% comment %}<p> {{ rel.description|safe|truncatewords:10 }}</p>{% endcomment %}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+
+
+
+
+
+<hr>

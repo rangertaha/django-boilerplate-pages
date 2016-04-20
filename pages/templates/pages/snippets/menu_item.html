@@ -1,0 +1,16 @@
+{% load i18n mptt_tags  %}
+
+
+{% if  page.children.all %}
+<ul class="nav-pills nav-stacked" style="list-style-type:none;">
+    {% for obj in page.children.all|dictsort:"order" %}
+        <li>
+            <a href="{%  url 'child-page' section obj.get_ancestors|tree_path:"/"  obj.slug %}">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-dashboard fa-stack-1x "></i>
+                </span> {{ obj.title }}</a>
+            {% include 'pages/snippets/menu_item.html' with page=obj %}
+        </li>
+    {% endfor %}
+</ul>
+{% endif %}

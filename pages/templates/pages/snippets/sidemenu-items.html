@@ -1,0 +1,13 @@
+{% for item in children %}
+<a href="#{{ item.slug }}-menu" class="list-group-item strong" data-toggle="collapse" data-parent="#{{ item.slug }}-menu"><i class="glyphicon glyphicon-thumbs-up"></i>{{ item.title }}<i class="fa fa-caret-down"></i></a>
+      <div class="collapse list-group-submenu list-group-submenu-1" id="{{ item.slug }}-menu">
+        {% if item.children.all %}
+         {% include "tools/snippets/sidemenu-items.html" with parent=item.children %}
+         {% endif %}
+        {% if item.tools.all %}
+           {% for tool in item.tools.all %}
+            <a href="{% url 'tools' kwargs.section item.slug tool.slug %}" class="list-group-item" data-parent="#{{ tool.slug }}-menu"><i class="glyphicon glyphicon-flag"></i>{{ tool.title}}</a>
+           {% endfor %}
+        {% endif %}
+      </div>
+{% endfor %}

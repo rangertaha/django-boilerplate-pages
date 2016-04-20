@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{% if section.pages.all %}
+<ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+{% for page in section.pages.all|dictsort:"order" %}
+    <li>
+        <a href="{% url 'top-page' section.slug page.slug %}">
+            <span class="fa-stack fa-lg pull-left">
+                <i class="fa fa-dashboard fa-stack-1x "></i>
+            </span> {{ page.title }}</a>
+        {% include 'pages/snippets/menu_item.html' with page=page %}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}

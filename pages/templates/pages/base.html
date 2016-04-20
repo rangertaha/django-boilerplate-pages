@@ -1,0 +1,70 @@
+{% load staticfiles menu %}
+
+{% spaceless %}
+<html lang="en" ng-app="">
+<head>
+    {% block meta %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ object.description }}">
+    <meta name="keywords" content="CYBINT, OSINT, GEOINT, SIGINT, HUMINT, Intelligence, Cyber Warfare">
+    <meta name="author" content="cybint.io, cybint-io">
+    {% endblock %}
+
+    <title>{{ object.title|default:'' }}</title>
+
+
+    {% block stylesheets %}
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="{% static 'menu.css' %}" rel="stylesheet">
+    {% endblock %}
+
+    {% block extra_stylesheets %}{% endblock %}
+</head>
+
+<body>
+    {% include 'pages/snippets/navbar.html' %}
+    {% include 'snippets/alerts.html' %}
+
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            {% block left_sidebar %}
+                {% include 'pages/snippets/menu.html' %}
+            {% endblock %}
+        </div>
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid xyz">
+                <div class="row">
+                    <div class="col-lg-12">
+                    {% block content %}
+                        <h1>Content... </h1>
+                    {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% comment %}{% include 'snippets/footer.html' %}{% endcomment %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'menu.js' %}"></script>
+    {% include 'snippets/ganalytics.html' %}
+
+</body>
+</html>
+{% endspaceless %}
+
+
+
+
+

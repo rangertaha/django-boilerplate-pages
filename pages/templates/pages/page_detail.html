@@ -1,0 +1,24 @@
+{% extends "pages/base.html" %}
+{% load markdown_deux_tags %}
+{% markdown_allowed %}
+
+
+
+
+
+{% block content %}
+
+<h1 style="text-align:center;">{{ object.title|safe }}{% if object.subtitle != None %}<small>&nbsp;{{ object.subtitle|title|safe }}</small>{% endif %}</h1>
+
+{% markdown %}{{ object.body }}{% endmarkdown %}
+
+{% include 'pages/snippets/tools.html' %}
+
+{% endblock %}
+
+
+{% block right_sidebar %}
+<h3>Related Tools</h3>
+
+<h3>Similar Tools</h3>
+{% endblock %}

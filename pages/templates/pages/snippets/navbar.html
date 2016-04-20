@@ -1,0 +1,63 @@
+<!-- /.navbar -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#upper-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+
+        <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button>
+
+
+      <a class="navbar-brand" href="#">CYBINT.io</a>
+    </div>
+    <div class="collapse navbar-collapse" id="upper-navbar">
+      <ul class="nav navbar-nav">
+          {% for sec in sections|dictsort:"order" %}
+              {% if sec.children.all %}
+                  <li class="dropdown {% if section == sec %}active{% endif %}">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-rss"></i>&nbsp;{{ sec.name }}</a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Top News</a></li>
+                        <li><a href="#">Top Tools</a></li>
+                          <li><a href="#">Top Techniques</a></li>
+                          <li><a href="#">Top links</a></li>
+                      </ul>
+                    </li>
+              {% else %}
+                  <li class="{% if section == sec %}active{% endif %}"><a href="{% url 'section' sec.slug %}">{{ sec.name }}</a></li>
+              {% endif %}
+
+          {% endfor %}
+
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-rss"></i>&nbsp;Feeds</a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Top News</a></li>
+            <li><a href="#">Top Tools</a></li>
+              <li><a href="#">Top Techniques</a></li>
+              <li><a href="#">Top links</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i>&nbsp;<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Logout</a></li>
+            <li><a href="#">Alerts</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Login</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav><!-- /.navbar -->
+
+
