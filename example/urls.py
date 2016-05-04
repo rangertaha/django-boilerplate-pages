@@ -10,7 +10,8 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'', include(urls)),
+    url(r'', include('pages.urls')),
+    #url(r'', include(urls)),
 ]
 
 urlpatterns = urlpatterns + patterns('', (r'^static/(?P<path>.*)$',

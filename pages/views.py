@@ -25,11 +25,12 @@ logger = logging.getLogger(__name__)
 
 
 class IndexView(TemplateView):
-    template_name = 'index-.html'
+    template_name = 'pages/index.html'
 
 
 class SectionView(DetailView, NavBarMixin):
     model = Section
+    template_name = 'pages/index.html'
 
     def get_queryset(self):
         return self.model.objects.filter(active=True, parent__isnull=True)
@@ -37,6 +38,7 @@ class SectionView(DetailView, NavBarMixin):
 
 class PageView(DetailView, PageMixin):
     model = Page
+    template_name = 'pages/index.html'
 
     def get_queryset(self):
         return self.model.objects.filter(active=True,
