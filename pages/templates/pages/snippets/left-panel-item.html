@@ -1,0 +1,16 @@
+{% load i18n mptt_tags  %}
+
+{% if  page.children.all %}
+<ul class="">
+    {% for obj in page.children.all|dictsort:"order" %}
+        <li class="{% if obj.slug in request.path %}active{% endif %}">
+            {% if obj.is_leaf_node %}
+                <a href="{% url 'child-page' section.slug obj.get_ancestors|tree_path:"/" obj.slug %}"><i class="fa fa-fw fa-file-text"></i> {{ obj.title }}</a>
+            {% else %}
+                <a href="#"><i class="fa fa-fw fa-folder-open"></i> {{ obj.title }}</a>
+                {% include 'pages/snippets/left-panel-item.html' with page=obj %}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endif %}
