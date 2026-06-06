@@ -19,14 +19,14 @@ logger = logging.getLogger(__name__)
 
 class NavBarMixin(ContextMixin):
     def get_context_data(self, **kwargs):
-        context = super(NavBarMixin, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['sections'] = Section.objects.filter().distinct()
         return context
 
 
 class MenuMixin(ContextMixin):
     def get_context_data(self, **kwargs):
-        context = super(MenuMixin, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         section = self.kwargs.get('section', None)
         context['section'] = Section.objects.get(slug=section)
         return context

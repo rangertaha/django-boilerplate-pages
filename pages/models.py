@@ -1,15 +1,11 @@
 # -*- coding:utf-8 -*-
-from __future__ import unicode_literals
 import logging
-import hashlib
 
-#from django.contrib.auth.models import User
-from django.conf import settings as django_settings
 from django.template.defaultfilters import slugify
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -32,7 +28,7 @@ class Page(MPTTModel):
     body = models.TextField(blank=True, null=True)
 
     # Related
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children', db_index=True)
 
     # Metadata
     created = models.DateTimeField(_('Created'), auto_now=True, auto_now_add=False)
@@ -50,10 +46,10 @@ class Page(MPTTModel):
 
     # It is required to rebuild tree after save, when using order for mptt-tree
     def save(self, *args, **kwargs):
-        super(Page, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
         Page.objects.rebuild()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.slug
 
 
@@ -65,7 +61,7 @@ class Section(MPTTModel):
     text = models.TextField(blank=True, null=True)
 
     # Related
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children', db_index=True)
     pages = models.ManyToManyField(Page, blank=True, limit_choices_to={'active': True})
 
     # Metadata
@@ -80,19 +76,19 @@ class Section(MPTTModel):
     class Meta:
         ordering = ('order', )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.slug
 
 
 @receiver(pre_save, sender=Section)
 def slugify_section_name(sender, **kwargs):
     section = kwargs['instance']
-    if section.slug is None or section.slug is '':
+    if not section.slug:
         section.slug = slugify(section.name)
 
 
 @receiver(pre_save, sender=Page)
 def slugify_page_title(sender, **kwargs):
     page = kwargs['instance']
-    if page.slug is None or page.slug is '':
+    if not page.slug:
         page.slug = slugify(page.title)

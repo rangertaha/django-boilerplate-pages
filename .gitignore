@@ -12,3 +12,10 @@ media/css/*.r*.css
 
 # Editor
 .idea/
+
+# Virtualenv
+.venv/
+
+# Build artifacts
+dist/
+build/

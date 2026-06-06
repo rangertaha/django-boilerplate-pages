@@ -4,7 +4,6 @@ import os
 import sys
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 APP = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 PROJ_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -45,12 +44,11 @@ SITE_ID = 1
 # to load the internationalization machinery.
 USE_I18N = True
 
-# If you set this to False, Django will not format dates, numbers and
-# calendars according to the current locale.
-USE_L10N = True
-
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
+
+# Default primary key field type for models that don't define one.
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
@@ -72,16 +70,13 @@ STATIC_ROOT = os.path.abspath(os.path.join(PROJ_ROOT, 'media', 'static'))
 STATIC_URL = '/static/'
 
 # Additional locations of static files
-STATICFILES_DIRS = [
-    os.path.join(PROJ_ROOT, 'project', 'static'),
-]
+STATICFILES_DIRS = []
 
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 
@@ -105,12 +100,11 @@ TEMPLATES = [
 ]
 
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',

@@ -9,15 +9,14 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required, permission_required
 
 
-from models import Section, Page
-from forms import *
-from signals import *
-from models import *
+from .models import Section, Page
+from .forms import *
+from .signals import *
 from .mixins import NavBarMixin, PageMixin
 
 # Get an instance of a logger

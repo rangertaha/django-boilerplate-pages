@@ -8,7 +8,7 @@ from django.forms import ModelForm
 from django.conf import settings
 
 
-from models import *
+from .models import *
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)

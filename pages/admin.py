@@ -4,10 +4,7 @@
 import logging
 
 from django.contrib import admin
-from django_mptt_admin.admin import DjangoMpttAdmin
-from suit.admin import SortableModelAdmin
-from mptt.admin import MPTTModelAdmin
-from models import Section, Page
+from .models import Section, Page
 
 
 # Get an instance of a logger
