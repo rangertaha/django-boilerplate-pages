@@ -31,7 +31,6 @@ and this project adheres to
 - Removed legacy `# -*- coding: utf-8 -*-` declarations (redundant on
   Python 3) via Ruff's pyupgrade rules.
 - **Django**: upgraded from Django 1.9 to **Django 5.2 LTS** (`>=5.2,<6.0`).
-- **django-mptt**: upgraded to `>=0.16` (tested with 0.18).
 - Migrated packaging from `setup.py` + `requirements.txt` to a PEP 621
   `pyproject.toml` using the Hatchling build backend.
 - Regenerated the initial migration against Django 5.2 / django-mptt 0.18

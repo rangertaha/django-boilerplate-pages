@@ -125,6 +125,20 @@ Lint and type-check:
     mypy
 
 
+Known issues
+------------
+
+- ``pages/static/`` bundles a ~24 MB legacy SmartAdmin/Bootstrap theme,
+  including a few demo ``.php`` files; it inflates the package and should
+  eventually be trimmed or moved out of the app.
+- ``pages/choices.py`` and ``pages/serializers.py`` are dead code — nothing
+  imports them.
+- The ``created``/``updated`` timestamp fields on ``Page`` and ``Section``
+  have their ``auto_now``/``auto_now_add`` options swapped, so ``created``
+  updates on every save and ``updated`` is set only on creation. Kept as-is
+  for now because fixing it changes model/migration behavior.
+
+
 License
 -------
 
