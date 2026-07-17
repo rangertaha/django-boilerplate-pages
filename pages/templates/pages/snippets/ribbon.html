@@ -10,10 +10,10 @@
 
     <!-- breadcrumb -->
     <ol class="breadcrumb">
-        <li><a href="{% url 'section' section.slug %}">{{ section.name }}</a></li>
+        {% if section %}<li><a href="{% url 'section' section.slug %}">{{ section.name }}</a></li>{% endif %}
 
         {% for spage in  page.get_ancestors %}
-            {% if page.get_ancestors|length_is:0 %}
+            {% if page.get_ancestors|length == 0 %}
                 <li><a href="{% url 'child-page' section.slug spage.get_ancestors|tree_path:"/" spage.slug %}">{{ spage.title }}</a></li>
             {% else %}
                 <li><a href="{% url 'top-page' section.slug spage.slug %}">{{ spage.title }}</a></li>

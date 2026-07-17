@@ -1,5 +1,9 @@
 from django import template
-'''
+
+# ``{% load menu %}`` requires this module-level Library instance.
+register = template.Library()
+
+"""
 from apps.menu.models import Section, Category
 
 
@@ -14,4 +18,4 @@ def menu_sidebar(section=None):
 @register.inclusion_tag('menu/snippets/menu_item.html')
 def menu_sidebar_item(page=None):
     return {'page': page}
-'''
+"""

@@ -7,7 +7,7 @@ name = "django-boilerplate-pages"
 dynamic = ["version"]
 description = "A reusable Django app providing hierarchical Pages and Sections."
 readme = "README.rst"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 license = { text = "MIT" }
 authors = [
     { name = "Rangertaha", email = "rangertaha@gmail.com" },
@@ -19,10 +19,9 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Software Development :: Libraries",
     "Topic :: Utilities",
     "Environment :: Web Environment",
@@ -31,12 +30,21 @@ classifiers = [
 ]
 dependencies = [
     "Django>=5.2,<6.0",
-    "django-mptt>=0.16",
+    "django-mptt>=0.18",
 ]
 
 [project.urls]
 Homepage = "https://github.com/rangertaha/django-boilerplate-pages"
 Repository = "https://github.com/rangertaha/django-boilerplate-pages"
+Changelog = "https://github.com/rangertaha/django-boilerplate-pages/blob/master/CHANGELOG.md"
+Issues = "https://github.com/rangertaha/django-boilerplate-pages/issues"
+
+[dependency-groups]
+dev = [
+    "coverage>=7",
+    "mypy>=1.14",
+    "ruff>=0.8",
+]
 
 [tool.hatch.version]
 path = "pages/__init__.py"
@@ -50,3 +58,23 @@ include = [
     "/README.rst",
     "/LICENSE",
 ]
+
+[tool.ruff]
+extend-exclude = [
+    "pages/migrations",
+    "pages/static",
+]
+
+[tool.ruff.lint]
+# The app relies on star imports (e.g. ``from .forms import *``); keep them.
+ignore = ["F403", "F405"]
+
+[tool.mypy]
+files = ["pages"]
+python_version = "3.12"
+ignore_missing_imports = true
+exclude = ["migrations/", "static/"]
+
+[tool.coverage.run]
+source = ["pages"]
+omit = ["*/migrations/*"]

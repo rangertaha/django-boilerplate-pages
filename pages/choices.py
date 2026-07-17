@@ -1,42 +1,37 @@
-#-*- coding:utf-8 -*-
-"""
-"""
+""" """
 
 LANGUAGE_CHOICES = (
-        ('', ''),
-        ('', ''),
-        ('', ''),
-        ('', ''),
-    )
+    ("", ""),
+    ("", ""),
+    ("", ""),
+    ("", ""),
+)
 
 TOOL_CHOICES = (
-    ('exe', 'Executable'),
-    ('lib', 'Library'),
-    ('script', 'Script'),
-    )
+    ("exe", "Executable"),
+    ("lib", "Library"),
+    ("script", "Script"),
+)
 
 BACKGROUND = (
-    ('/static/img/bg/linux.png', "Linux"),
-    ('/static/img/bg/offsec.png', "Offensive Security"),
-    ('/static/img/bg/cybintops.png', "cybintops Shield"),
-    )
+    ("/static/img/bg/linux.png", "Linux"),
+    ("/static/img/bg/offsec.png", "Offensive Security"),
+    ("/static/img/bg/cybintops.png", "cybintops Shield"),
+)
 
 
 OPERATING_SYSTEMS = (
-    ('linux', 'Linux'),
-    ('mac', 'Mac OSX'),
-    ('windows', 'MS Windows'),
-    )
-
-
+    ("linux", "Linux"),
+    ("mac", "Mac OSX"),
+    ("windows", "MS Windows"),
+)
 
 
 ICONS = (
-    ('asterisk', 'glyphicon glyphicon-asterisk'),
-    ('plus', 'glyphicon glyphicon-plus'),
-    ('euro', 'glyphicon glyphicon-euro'),
-    )
-
+    ("asterisk", "glyphicon glyphicon-asterisk"),
+    ("plus", "glyphicon glyphicon-plus"),
+    ("euro", "glyphicon glyphicon-euro"),
+)
 
 
 """

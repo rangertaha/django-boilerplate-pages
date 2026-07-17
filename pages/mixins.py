@@ -1,15 +1,8 @@
-#-*- coding:utf-8 -*-
-"""
-"""
-import logging
-import random
+""" """
 
-from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic.list import ListView
-from django.views.generic.edit import FormView
+import logging
+
 from django.views.generic.base import ContextMixin
-from django.views.generic import View
-from django.conf import settings
 
 from .models import Section
 
@@ -20,26 +13,20 @@ logger = logging.getLogger(__name__)
 class NavBarMixin(ContextMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['sections'] = Section.objects.filter().distinct()
+        context["sections"] = Section.objects.filter().distinct()
         return context
 
 
 class MenuMixin(ContextMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        section = self.kwargs.get('section', None)
-        context['section'] = Section.objects.get(slug=section)
+        section = self.kwargs.get("section", None)
+        context["section"] = Section.objects.get(slug=section)
         return context
 
 
 class PageMixin(NavBarMixin, MenuMixin):
     pass
-
-
-
-
-
-
 
 
 """
@@ -101,4 +88,3 @@ class SiteMixin(FooterMixin, NavBarMixin):
 
         return context
 """
-

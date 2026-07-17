@@ -1,11 +1,7 @@
-#-*- coding:utf-8 -*-
-"""
-"""
+""" """
+
 # import the logging library
 import logging
-
-from django.forms import ModelForm
-from django.conf import settings
 
 
 from .models import *
@@ -29,4 +25,3 @@ class MyCustomForm(forms.Form):
     content2 = MarkdownFormField()
 
 """
-
