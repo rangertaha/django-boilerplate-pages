@@ -28,14 +28,11 @@
 
 <body>
     {% include 'pages/snippets/navbar.html' %}
-    {% include 'snippets/alerts.html' %}
 
     <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            {% block left_sidebar %}
-                {% include 'pages/snippets/menu.html' %}
-            {% endblock %}
+            {% block left_sidebar %}{% endblock %}
         </div>
 
 
@@ -58,7 +55,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="{% static 'menu.js' %}"></script>
-    {% include 'snippets/ganalytics.html' %}
 
 </body>
 </html>

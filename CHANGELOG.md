@@ -15,9 +15,9 @@ and this project adheres to
 - GitHub Actions CI workflow (`.github/workflows/ci.yml`) running the test
   suite with coverage, Ruff (lint + format check) and mypy on Python 3.12,
   3.13 and 3.14 for pushes and pull requests to `master`.
-- Real test suite for the `pages` app (36 tests covering models and MPTT tree
-  behavior, slugify signals, URL routing, views and admin), replacing the
-  placeholder `1 + 1 == 2` test.
+- Real test suite for the `pages` app (42 tests covering models and MPTT tree
+  behavior, timestamp semantics, slugify signals, URL routing, views and admin
+  including changelist search), replacing the placeholder `1 + 1 == 2` test.
 - Ruff, mypy and coverage.py configuration in `pyproject.toml`, plus a `dev`
   dependency group (`coverage`, `mypy`, `ruff`).
 - `Changelog` and `Issues` project URLs in the package metadata.
@@ -50,6 +50,18 @@ and this project adheres to
   `PyPDF2`, `xhtml2pdf`, `markdown2`, `django-markdown-deux`, `nose`,
   `coverage`, `six`, `html5lib`, `httplib2`, `Pillow`.
 - Removed the legacy `.travis.yml` CI config.
+- Removed the eight stray server-side `.php` demo files bundled under
+  `pages/static/` (`dummy.php`, `upload.php`, `ajax/demowidget.php`, the
+  `php/demo-*.php` samples and the two ckeditor sample scripts) — PHP scripts
+  must not ship in a Python wheel; nothing referenced them.
+- Removed the dead modules `pages/choices.py` (unused glyphicon/choices dump)
+  and `pages/serializers.py` (empty stub) — nothing imported either.
+- Removed the unused and broken `pages/page_detail.html` and
+  `pages/section_detail.html` templates (not referenced by any view and
+  depending on `markdown_deux_tags` from the dropped `django-markdown-deux`
+  dependency), and removed the nonexistent `snippets/alerts.html`,
+  `snippets/ganalytics.html` and `pages/snippets/menu.html` includes from
+  `pages/base.html`.
 
 ### Fixed
 
@@ -63,6 +75,15 @@ and this project adheres to
   parent relations.
 - Fixed an identity-vs-equality bug in the slugify signals
   (`slug is ''` → falsy check).
+- Fixed the swapped `created`/`updated` timestamp options on `Page` and
+  `Section`: `created` now uses `auto_now_add=True` (set once on creation) and
+  `updated` uses `auto_now=True` (refreshed on every save) — previously they
+  were reversed. Ships with migration
+  `0002_alter_page_created_alter_page_updated_and_more`.
+- Trimmed `PageAdmin.search_fields` and `SectionAdmin.search_fields` to text
+  fields only (`title`/`name`, `slug`, `subtitle`, `description`,
+  `body`/`text`); they previously included the non-text `id`, `active` and
+  `order` fields.
 - Fixed templates that failed to render on Django 5.2: replaced
   `{% load staticfiles %}` (removed in Django 3.0) with `{% load static %}`,
   replaced the `length_is` filter (removed in Django 5.1) with a

@@ -37,8 +37,8 @@ class Page(MPTTModel):
     )
 
     # Metadata
-    created = models.DateTimeField(_("Created"), auto_now=True, auto_now_add=False)
-    updated = models.DateTimeField(_("Updated"), auto_now=False, auto_now_add=True)
+    created = models.DateTimeField(_("Created"), auto_now_add=True)
+    updated = models.DateTimeField(_("Updated"), auto_now=True)
     active = models.BooleanField(_("Active"), default=True)
     status = models.IntegerField(_("Status"), choices=STATUSES, default=0)
 
@@ -77,8 +77,8 @@ class Section(MPTTModel):
     pages = models.ManyToManyField(Page, blank=True, limit_choices_to={"active": True})
 
     # Metadata
-    created = models.DateTimeField(auto_now=True, auto_now_add=False)
-    updated = models.DateTimeField(auto_now=False, auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     public = models.BooleanField(default=True)
     active = models.BooleanField(default=True)
 

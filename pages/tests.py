@@ -29,6 +29,25 @@ class PageModelTests(TestCase):
         self.assertIsNotNone(page.created)
         self.assertIsNotNone(page.updated)
 
+    def test_timestamp_field_semantics(self):
+        """created is set once on creation; updated refreshes on every save."""
+        created_field = Page._meta.get_field("created")
+        updated_field = Page._meta.get_field("updated")
+        self.assertTrue(created_field.auto_now_add)
+        self.assertFalse(created_field.auto_now)
+        self.assertTrue(updated_field.auto_now)
+        self.assertFalse(updated_field.auto_now_add)
+
+    def test_created_fixed_and_updated_advances_on_save(self):
+        page = Page.objects.create(title="Stamps", order=1)
+        original_created = page.created
+        original_updated = page.updated
+        page.title = "Stamps edited"
+        page.save()
+        page.refresh_from_db()
+        self.assertEqual(page.created, original_created)
+        self.assertGreater(page.updated, original_updated)
+
     def test_ordering_by_order_field(self):
         Page.objects.create(title="Second", order=2)
         Page.objects.create(title="First", order=1)
@@ -105,6 +124,15 @@ class SectionModelTests(TestCase):
         section = Section.objects.create(name="Defaults", order=1)
         self.assertTrue(section.active)
         self.assertTrue(section.public)
+
+    def test_timestamp_field_semantics(self):
+        """created is set once on creation; updated refreshes on every save."""
+        created_field = Section._meta.get_field("created")
+        updated_field = Section._meta.get_field("updated")
+        self.assertTrue(created_field.auto_now_add)
+        self.assertFalse(created_field.auto_now)
+        self.assertTrue(updated_field.auto_now)
+        self.assertFalse(updated_field.auto_now_add)
 
     def test_ordering_by_order_field(self):
         Section.objects.create(name="B", order=2)
@@ -238,6 +266,33 @@ class AdminTests(TestCase):
         Section.objects.create(name="Docs", order=1)
         response = self.client.get(reverse("admin:pages_section_changelist"))
         self.assertEqual(response.status_code, 200)
+
+    def test_page_changelist_search(self):
+        match = Page.objects.create(title="Search Target", order=1)
+        Page.objects.create(title="Other", order=2)
+        response = self.client.get(
+            reverse("admin:pages_page_changelist"), {"q": "target"}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(list(response.context["cl"].queryset), [match])
+
+    def test_page_search_fields_are_text_fields(self):
+        for name in PageAdmin.search_fields:
+            field = Page._meta.get_field(name)
+            self.assertIn(
+                field.get_internal_type(),
+                ("CharField", "SlugField", "TextField"),
+                f"search field {name!r} is not a text field",
+            )
+
+    def test_section_changelist_search(self):
+        match = Section.objects.create(name="Docs Portal", order=1)
+        Section.objects.create(name="Other", order=2)
+        response = self.client.get(
+            reverse("admin:pages_section_changelist"), {"q": "portal"}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(list(response.context["cl"].queryset), [match])
 
     def test_page_add_form_renders(self):
         response = self.client.get(reverse("admin:pages_page_add"))
